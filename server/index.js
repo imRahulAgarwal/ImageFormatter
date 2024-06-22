@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
     cors({
         origin,
-        methods: ["POST"],
+        methods: ["GET,POST"],
     })
 );
 app.use("/api/images", imageRouter);
