@@ -32,8 +32,7 @@ jobs:
           npm ci
           touch .env
           echo "${{ secrets.SERVER_ENV }}" > .env
-          pm2 stop imageformatter || true
-          pm2 start npm --name imageformatter -- start 
+          pm2 restart imageformatter || pm2 start npm --name imageformatter -- start
 
   client:
     needs: build
