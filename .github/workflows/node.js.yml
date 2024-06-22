@@ -44,8 +44,6 @@ jobs:
 
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
-        env:
-          TARGET_DIR: /var/www/ImageFormatter
         uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
@@ -57,7 +55,7 @@ jobs:
           touch .env
           echo "${{ secrets.CLIENT_ENV }}" > .env
           npm run build
-          if [ ! -d "$TARGET_DIR" ]; then
-            sudo mkdir -p "$TARGET_DIR"
+          if [ ! -d "${{vars.STATIC_FILES_FOLDER}}" ]; then
+            sudo mkdir -p "${{vars.STATIC_FILES_FOLDER}}"
           fi
-          sudo rsync -av dist/ "$TARGET_DIR"
+          sudo rsync -av dist/ "${{vars.STATIC_FILES_FOLDER}}"
