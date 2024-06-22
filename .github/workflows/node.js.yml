@@ -33,7 +33,7 @@ jobs:
           touch .env
           echo "${{ secrets.SERVER_ENV }}" > .env
           pm2 stop imageformatter || true
-          pm2 start index.js --name imageformatter
+          pm2 start npm --name imageformatter -- start 
 
   client:
     needs: build
